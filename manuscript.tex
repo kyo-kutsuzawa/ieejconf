@@ -5,7 +5,7 @@
 \usepackage[ms]{pxchfon}
 \usepackage{titlesec}
 \usepackage{amsmath}
-\usepackage{enumitem}
+\usepackage[shortlabels]{enumitem}
 \usepackage{indentfirst}
 
 \setpagelayout*{top=35truemm,bottom=27truemm,left=17.2truemm,right=17.2truemm}
@@ -38,8 +38,8 @@
 
 \def\@arabicz#1{\ifcase#1 ０\or １\or ２\or ３\or ４\or ５\or ６\or ７\or ８\or ９\else\@ctrerr\fi}
 \def\arabicz#1{\expandafter\@arabicz\csname c@#1\endcsname}
-\def\@arabicr#1{\ifcase#1 ⓪\or ①\or ②\or ③\or ④\or ⑤\or ６\or ７\or ８\or ９\else\@ctrerr\fi}
-\def\arabicr#1{\expandafter\@arabicr\csname c@#1\endcsname}
+\def\@arabicr#1{\ifcase#1\or ①\or ②\or ③\or ④\or ⑤\or ⑥ \or ⑦\or ⑧\or ⑨\else\@ctrerr\fi\relax}
+\def\arabicr#1{\@arabicr{\@nameuse{c@#1}}}
 
 \def\fnum@Jfigure{図}
 \def\fnum@Efigure{Fig.}
@@ -82,8 +82,6 @@
 
 \renewcommand{\thesection}{\arabicz{section}．}
 \renewcommand{\thesubsection}{＜$\!$\arabic{section}・\arabic{subsection}$\!$＞}
-\renewcommand{\theenumi}{\arabicr{enumi}}
-\renewcommand{\labelenumi}{\theenumi}
 \renewcommand{\labelitemi}{・}
 \renewcommand{\refname}{文　献}
 
@@ -95,7 +93,9 @@
 \setlength{\labelsep}{3pt}
 \setlength{\parindent}{0pt}
 \setlist[itemize]{topsep=0pt,partopsep=0pt,leftmargin=9.8pt}
-\setlist[enumerate]{topsep=0pt,partopsep=0pt}
+\setlist[enumerate]{topsep=0pt,partopsep=0pt,leftmargin=20pt,labelsep=0pt}
+\AddEnumerateCounter{\arabicr}{\@arabicr}{①}
+\SetEnumerateShortLabel{m}{\arabicr*}
 \pagestyle{empty}
 
 \title{\fontsize{19.5pt}{25pt}\selectfont 電気学会全国大会講演論文の書き方\vspace{8pt}}
@@ -181,8 +181,8 @@
 表題等は、この見本に従って次の①～④の順序で記載し、本文を書き始めてください。
 （2ページ目以降は、①～③不要）文字サイズと行送りは、表2を参考にしてください。
 
-\begin{enumerate}
-  \item 表題：第1行中央に2カラム通しで書く（長ければ第2行も使う。第1行で済めば、第2行目は詰める）。表題1行目の左に、講演番号のスペースをあける。（テンプレートにおいては講演番号のスペースは設定してある）
+\begin{enumerate}[m]
+  \item 表題：第1行中央に2カラム通しで書く（長ければ第2行も使う。第1行で済めば、第2行目は詰める）。\\表題1行目の左に、講演番号のスペースをあける。（テンプレートにおいては講演番号のスペースは設定してある）
   \item 著者名および勤務先：表題の下を1行あけて、次の行から中央に2カラム通しで書く。講演者名の右肩に「＊」印を付ける。
   \item 英文表題、氏名（所属）：著者名および勤務先の下を1行あけて、次の行から中央に2カラム通しで書く。
   \item 本文：英文による表題、氏名の下を1行あけて、次の行から書く。2ページは、上マージンに続いて第1行から本文を書く。
